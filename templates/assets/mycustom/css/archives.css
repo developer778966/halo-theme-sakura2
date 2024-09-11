@@ -1,0 +1,138 @@
+/* 魔改 新增归档页面样式 start */
+.inner {
+    margin: 0 auto;
+    max-width: 800px;
+}
+.post {
+    padding-bottom: 50px;
+    position: relative;
+}
+article {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+.timenode-sanarous .meta:hover {
+    color: #444;
+    background: #f4f4f4;
+}
+div.timenode-sanarous {
+    position: relative;
+}
+div.timenode-sanarous:before {
+    top: 0;
+    height: 14px;
+}
+div.timenode-sanarous:after, div.timenode-sanarous:before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    background: #49b1f5;
+    width: 2px;
+    left: 7px;
+}
+.timenode-sanarous a.meta {
+    font-size: 18px;
+}
+div.timenode-sanarous .meta {
+    position: relative;
+    color: #555;
+    line-height: 32px;
+}
+div.timenode-sanarous .body, div.timenode-sanarous .meta {
+    max-width: calc(100% - 24px);
+}
+.timenode-sanarous .meta {
+    padding: 6px 0;
+    line-height: 1.5;
+    height: auto;
+    max-width: 100%;
+    display: flex;
+    font-size: .9375rem;
+    font-weight: 500;
+    border-radius: 2px;
+    color: #f4f4f4;
+}
+.timenode-sanarous a {
+    word-break: break-word;
+}
+div.timenode-sanarous .meta:before {
+    background: #49b1f5;
+    border-radius: 8px;
+}
+div.timenode-sanarous .meta:before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    z-index: 2;
+}
+.timenode-sanarous .meta time {
+    margin-left: 27px;
+    margin-right: 4px;
+    flex-shrink: 0;
+    width: 43px;
+}
+.my-post-time {
+    color: #fff;
+    background-color: #49b1f5;
+    border-radius: 5px;
+    padding-left: 8px;
+    font-size: 12px;
+}
+.timenode-sanarous a.meta span {
+    margin-left: 10px;
+}
+div.timenode-sanarous .meta:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    z-index: 2;
+}
+/* .meta:hover:after这个效果是：选中之后，前面的小蓝点变成大橙点*/
+div.timenode-sanarous .meta:hover:after {
+    background: #eb820a;
+    transform: scale(1);
+}
+div.timenode-sanarous .meta:after {
+    background: #49b1f5;
+    margin-left: 2px;
+    margin-top: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    transform: scale(.5);
+    transition: all .28s ease;
+    -moz-transition: all .28s ease;
+    -webkit-transition: all .28s cubic-bezier(0, 1.82, 1, 1);
+    -o-transition: all .28s ease;
+}
+div.timenode-sanarous:last-child:after {
+    height: calc(100% - 26px - 16px);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+div.timenode-sanarous:after {
+    top: 31px;
+    height: calc(100% - 18px);
+}
+div.timenode-sanarous:after, div.timenode-sanarous:before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    background: #49b1f5;
+    width: 2px;
+    left: 7px;
+}
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+    margin-top: 0;
+}
+h2 {
+    font-size: 24px;
+    margin: 40px 0 18px;
+}
+/* 新增归档页样式 end */

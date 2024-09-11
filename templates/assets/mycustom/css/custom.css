@@ -1,0 +1,489 @@
+:root{
+    --card-bg: #fafae8;
+    --btn-bg: orange;
+    --text-bg-hover: orange;
+    --btn-hover-color: #ff7242;
+    --hr-border: orange;
+    --hr-before-color: orange;
+}
+
+/* 朋友圈item背景 */
+.moments-item{
+    background-color: #ffa50012;
+}
+
+/* 文章内列表编号 */
+#article-container ol li:before, 
+#article-container ul li:before{
+    background-color: orange;
+}
+
+/* 目录 */
+#aside-content #card-toc .toc-content .toc-link.active {
+    border-left-color: orange;
+    background: rgba(255, 166, 0, 0.5);
+    color: #fff;
+}
+
+/* 文章标题链接 */
+#article-container a{
+    color: #ff7242;
+}
+
+/* 轮播图边框 */
+.blog-slider__img img{
+    border: orange solid 1px;
+}
+.blog-slider__title:hover{
+    color: orange;
+}
+
+/* 链接 */
+a{
+    text-decoration: none !important;
+}
+/* 分类页面链接 */
+.article-sort-item-title:hover{
+    color: orange;
+}
+/* 标签页链接 */
+.tag-cloud-list a:hover{
+    color: orange !important;
+}
+
+/* 导航栏链接 */
+#nav.fixed a:hover, #nav.fixed #site-name:hover, #nav.fixed #toggle-menu:hover {
+    color: orange;
+}
+#nav .menus_items .menus_item > a::after{
+    display: none;
+}
+
+
+/* 本地搜索 */
+.search-dialog__title{
+    color: #ff7242;
+}
+#local-search .search-dialog .local-search-box input{
+    border: 2px solid orange;
+}
+#local-search .search-dialog .local-search__hit-item:before{
+    border-color: orange;
+}
+#local-search .search-dialog .local-search__hit-item a:hover {
+    color: orange;
+}
+
+/* 磁贴 */
+figure.gallery-group{
+    border: orange solid 2px;
+}
+
+/* 首页侧边栏文章标题，首页文章标题 */
+#aside-content .aside-list > .aside-list-item .content > .title:hover,
+#recent-posts > .recent-post-item >.recent-post-info > .article-title:hover {
+    color: orange;
+}
+
+/* 文章分类 tag */
+.article-meta__categories {
+    background-color: #fdf0e3;
+    padding: 2px 2px;
+    border-radius: 4px;
+    border: #fbe4ba solid 2px;
+    color: #6d3e0f!important;
+    line-height: 40px;
+}
+.article-meta__categories:hover{
+    border: orange solid 2px;
+}
+
+/* 文章标签 tag */
+.article-meta__tags{
+    background-color: orange;
+    color: #fff!important;
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+
+.article-meta__tags:hover{
+    background-color: #ff7242;
+}
+
+/* 侧边栏头像框 */
+#aside-content .card-info img{
+    border: orange solid 2px;
+}
+
+/* 侧边栏按钮 */
+#aside-content .card-info #card-info-btn{
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* 页脚透明 */
+#footer {
+    background: transparent !important;
+}
+
+/* 头图透明 */
+#page-header {
+    background: transparent !important;
+}
+
+/* 文末标签*/
+#post .tag_share .post-meta__tags {
+    border: 1px solid orange;
+    color: orange;
+}
+
+#post .tag_share .post-meta__tags:hover{
+    background-color: orange;
+}
+
+/* 背景色 */
+div#post,
+div#page,
+div#archive,
+div#tag,
+div#category {
+    background: #fafae8;
+}
+
+/*首页文章图片*/
+#recent-posts > .recent-post-item .post_cover img.post_bg{
+    width: 90%;
+    height: 80%;
+    margin: 5%;
+    border: #ffe4b3 solid 2px;
+}
+
+/*首页文章图片框*/
+#recent-posts>.recent-post-item .post_cover {
+    width: 60%;
+}
+/*控制手机自适应*/
+@media screen and (max-width: 768px) {
+    #recent-posts>.recent-post-item .post_cover {
+        width: 100%;
+    }
+}
+
+/* 文末版权信息 */
+#post .post-copyright .post-copyright-meta{
+    color:#ff7242;
+}
+#post .post-copyright::before{
+    background-color: orange;
+}
+#post .post-copyright .post-copyright-info a:hover{
+    color:orange;
+}
+#post .post-copyright{
+    background-color: #fbe4ba7e;
+}
+
+/* 文章内表格 
+table th {
+    background-color: #ff8c2a;
+}
+table tr:nth-child(2n) {
+    background-color: white;
+}
+table tr:nth-child(2n+1) {
+    background-color: #f7cc95;
+}*/
+
+/* 首页边框 */
+.recent-post-item,
+.card-widget{
+    border: 2px solid #ffa50080;
+}
+
+/* 友链 */
+/* .flink#article-container .flink-list > .flink-list-item{
+    background-color: #f9f1e9;
+    border: 2px dashed #ffefd2;
+    margin: 10px 7px;
+}
+.flink#article-container .flink-list > .flink-list-item:hover{
+    border: 2px solid orange;
+}
+.flink#article-container .flink-list > .flink-list-item a img{
+    border: 2px solid #ffefd2;
+} */
+.flink-list > a:hover:before {
+    background-color: rgb(252, 205, 118,0.8);
+}
+
+/* 百宝箱 */
+#article-container a.button {
+    color: #ff7242;
+    margin: 8px;
+    background-color: #f9f1e9;
+    border: 2px solid #ffefd2;
+    border-radius: 10px;
+}
+
+/* 小鸡腿儿特供 */
+[data-title="向上吧少女"]::before{
+    background-color: rgba(252, 156, 188, 0.8)!important;
+}
+
+/* 菜单栏按钮修改*/
+/*
+极其离谱的问题出现了
+当给菜单栏的子菜单设置圆角
+并为了hover状态依旧是圆角，采用了border-radius:hidden的时候
+鼠标向下摸到子菜单的时候，因为hover判定区域被hidden，子菜单会缩回
+必须将margin-top设置成0才可以保证被判定到，但是效果会很差
+*/
+#nav .menus_items .menus_item .menus_item_child li {
+    display: inline-block;
+}
+ul.menus_item_child{
+    overflow: hidden;
+    border-radius: 10px;
+}
+#nav .menus_item_child {
+    margin-top: 0px !important;
+}
+
+/* 菜单栏调整 */
+#nav span{
+    margin: 5px;
+}
+#nav .site-page{
+    padding: 10px;
+}
+
+/* ------------------- 魔改start --------------------- */
+.link-article {
+    background: #fafae8;
+    padding: 50px 40px;
+    border-radius: 8px;
+}
+
+/* 3 链接样式*/
+.links {
+	margin-bottom: 80px
+}
+
+.links ul {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	width: 100%;
+	display: inline-block
+}
+
+.links ul li {
+	width: 32%;
+	float: left;
+	border: 1px solid #ececec;
+	padding: 10px 30px;
+	margin: 4px;
+	position: relative;
+	overflow: hidden;
+	transition: all .3s;
+	border-radius: 10px;
+	/** fix #35 友链多了以后显示BUG */
+	height: 100px;
+}
+.links ul li {
+    width: auto;
+}
+.links ul li img {
+	float: right;
+	box-shadow: inset 0 0 10px #000;
+	padding: 5px;
+	opacity: 1;
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transition: all ease 1s;
+	-webkit-transition: all ease 1s;
+	-moz-transition: all ease 1s;
+	-o-transition: all ease 1s;
+	margin-top: 5px;
+	width: 65px;
+	height: 65px;
+	padding: 2px;
+	border-radius: 100%
+}
+
+.links ul li:hover img {
+	transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-ms-transform: rotate(360deg)
+}
+
+span.sitename {
+	color: orange;
+	padding-bottom: 10px;
+	display: block;
+	transition: all .3s;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.linkdes {
+	color: #949494;
+	font-size: 13px;
+	padding: 10px 0;
+	border-top: 1px dashed #ddd;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 25px;
+	transition: all .5s
+}
+
+.link-title {
+	font-weight: 400;
+	color: #6d6d6d;
+	padding-left: 0;
+	border-left: none;
+	margin: 50px 0 20px
+}
+
+.link-title span.fake-title {
+	padding-left: 10px;
+	border-left: 3px solid orange
+}
+
+.links ul li:before {
+	content: "";
+	background-color: orange;
+	transform: skew(45deg, 0);
+	width: 0;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: -60px;
+	z-index: -1;
+	transition: all .5s;
+	opacity: 0.2;
+}
+
+.links ul li:hover {
+	color: #27323a;
+	border: 1px solid orange
+}
+
+.links ul li:hover:before {
+	width: 180%
+}
+
+.links ul li:hover .linkdes {
+	border-top: 1px dashed #fff
+}
+/* 鼠标悬浮link-item时，背景滚动覆盖 */
+.links .link-items .link-item:hover {
+    cursor: pointer;
+	transform: translateX(10px);
+	-webkit-transform:translateX(10px);
+	transition: all .3s ease-out;
+	color: orange;
+}
+/* 调整moment页面上边界对齐 */
+.moments-container {
+    margin: 0;
+}
+/* 调整moment页面底部加载更多按钮外边框高度 */
+.moments-container .pagination .at_button {
+    height: 35px;
+}
+/* 单行代码块样式 */
+code:not([class]) {
+    padding: 0.25rem 0.4rem;
+    border-radius: 4px;
+    margin: 0px 4px;
+    background: #e3e3e3;/* #e3e3e3 #dfdfdf #FF7C7C */
+    line-height: 2;
+    box-shadow: 0 8px 16px -4px #2c2d300c;
+    font-size: 16px;
+    font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
+/* 覆盖字体样式 */
+body.serif {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+    font-size: 16px;
+}
+/* 覆盖文章目录start */
+#aside-content #card-toc .toc-content .toc-link.active {
+    line-height: 24px;
+    border-radius: 12px;
+    border-left-color: #FF7C7C;
+    background-color: #fff;
+    color: #FF7C7C;
+    font-weight: 700;
+    font-size: 20px;
+    position: relative;
+}
+
+[data-theme=dark].toc-list .toc-item.active .toc-link {
+    color: #fff;
+}
+
+#aside-content #card-toc .toc-content .toc-item.active .toc-link {
+    opacity: 1;
+    border-radius: 8px;
+}
+
+#aside-content #card-toc .toc-content .toc-link {
+    line-height: 24px;
+    padding: 8px;
+    border-left: 0 solid transparent;
+    border-radius: 12px;
+    color: rgba(60, 60, 67, 0.8);
+    cursor: default;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+#aside-content #card-toc .toc-content a.toc-link:not(.active) {
+    opacity: 0.6;
+    cursor: pointer;
+    //filter: blur(1px);
+    transition: 0.3s;
+}
+
+#aside-content #card-toc:hover .toc-content a.toc-link:not(.active) {
+    filter: blur(0px);
+    opacity: 1;
+}
+
+#aside-content #card-toc .toc-content a:hover.toc-link:not(.active) {
+    color: #FF7C7C;
+}
+
+/* 目录卡片边距 */
+#card-toc {
+    padding: 0.5rem 0.5rem !important;
+}
+/* 目录容器 */
+#card-toc {
+    position: relative; /* 确保父容器有相对定位 */
+    padding: 0.5rem 0.5rem !important;
+}
+
+/* 目录内容 */
+#aside-content #card-toc .toc-content {
+    position: sticky; /* 目录内容使用 sticky 定位 */
+    top: 50px; /* 固定位置的偏移量，可以根据需要调整 */
+    z-index: 1000; /* 确保目录始终位于页面内容之上 */
+    /* 其他样式 */
+}
+/* 覆盖掉目录前面的灰色竖线，设置宽度0 不显示 */
+.toc-link:before {
+    width: 0;
+}
+/* 覆盖文章目录end */

@@ -1,0 +1,194 @@
+<!--/* 主题 js */-->
+<th:block th:fragment="scripts">
+  <!--/* 基础 JS */-->
+  <script type="module" async th:src="@{/assets/dist/main.min.js}"></script>
+
+  <!--/* PJAX */-->
+  <script type="module" async th:if="${theme.config.others.poi_pjax}" th:src="@{/assets/dist/libs/pjax.min.js}"></script>
+
+  <script type="module" async th:src="@{/assets/dist/libs/lazysizes.min.js}"></script>
+
+  <script type="text/javascript" th:inline="javascript">
+    function imgError(dom) {
+      dom.src = "[(${#theme.assets('/images/default/temp.webp')})]"
+      dom.onerror = null;
+    }
+  </script>
+  <!--自己魔改的 start-->
+  <!-- 鼠标点击 烟花特效 -->
+  <script type="text/javascript" th:src="@{/assets/mycustom/js/fireworks.js}" defer>
+  </script>
+
+  <!--目录-->
+  <script th:if="${theme.config.post.post_toc}" th:src="@{/assets/mycustom/tocbot/dist/tocbot.min.js}" defer></script>
+  <!-- 目录填充 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      tocFn();
+    });
+    const tocFn = function () {
+      const postContent = document.querySelector('.post-content');
+      if (postContent == null) return;
+      const titles = postContent.querySelectorAll('h1,h2,h3,h4,h5,h6');
+      // 没有 toc 目录，则直接移除
+      if (titles.length === 0 || !titles) {
+          const cardToc = document.getElementById("card-toc");
+          cardToc?.remove();
+          const $mobileTocButton = document.getElementById("mobile-toc-button")
+          if ($mobileTocButton) {
+              $('#mobile-toc-button').attr('style', 'display: none');
+          }
+      } else {
+          tocbot.init({
+              tocSelector: '.toc-content',
+              contentSelector: '.post-content',
+              headingSelector: 'h1,h2,h3,h4,h5,h6',
+              listItemClass: 'toc-item',
+              activeLinkClass: 'active',
+              activeListItemClass: 'active',
+              headingsOffset: -400,
+              scrollSmooth: true,
+              scrollSmoothOffset: -70,
+              tocScrollOffset: 50,
+          });
+
+          const $cardTocLayout = document.getElementById('card-toc')
+          const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0]
+          // toc元素點擊
+          $cardToc.addEventListener('click', (ele) => {
+              if (window.innerWidth < 900) {
+                  $cardTocLayout.classList.remove("open");
+              }
+          })
+
+      }
+    }
+    
+  </script>
+  <!-- 建站时间统计 -->
+  <th:block th:if="${theme.config.others.TimeStatistics}">
+    <script type="text/javascript">
+      function show_runtime() {
+          window.setTimeout("show_runtime()", 1000);
+          X = new Date("[(${theme.config.others.TimeStatistics})]");
+          Y = new Date();
+          T = (Y.getTime() - X.getTime());
+          M = 24 * 60 * 60 * 1000;
+          a = T / M;
+          A = Math.floor(a);
+          b = (a - A) * 24;
+          B = Math.floor(b);
+          c = (b - B) * 60;
+          C = Math.floor((b - B) * 60);
+          D = Math.floor((c - C) * 60);
+          span_dt_dt.innerHTML = A + "天" + B + "小时" + C + "分" + D + "秒"
+      }
+      show_runtime();
+    </script>
+  </th:block>
+  <!-- 动态打字 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <!-- 未央样式js加载 -->
+  <div>
+    <script th:src="@{/assets/mycustom/js/utils.js}" defer></script>
+    <script th:src="@{/assets/mycustom/js/main.js}" defer></script>
+    <script th:src="@{/assets/mycustom/js/tw_cn.js}" defer></script>
+    <script th:src="@{/assets/js/vanilla-lazyload/lazyload.iife.min.js}"></script>
+    <script th:src="@{/assets/mycustom/js/search/local-search.js}" defer></script>
+    <div class="js-pjax">
+      <script>
+        function subtitleType () {
+          if (true) { 
+            var typed = new Typed("#subtitle", {
+              strings: "醉卧经阁半卷书&#44;坐井说天阔,纵使文章惊海里&#44;纸上苍生而已".split(","),
+              startDelay: 300,
+              typeSpeed: 150,
+              loop: true,
+              backSpeed: 50
+            })
+          } else {
+            document.getElementById("subtitle").innerHTML = '醉卧经阁半卷书&#44;坐井说天阔'
+          }
+        }
+        
+        if (true) {
+          
+          subtitleType()
+        }
+      </script>
+      <script>
+        if (document.getElementsByClassName('mermaid').length) {
+          if (window.mermaidJsLoad) mermaid.init()
+          else {
+            getScript('@{/assets/js/mermaid/mermaid.min.js}').then(() => {
+              window.mermaidJsLoad = true
+              mermaid.initialize({
+                theme: 'default',
+              })
+              false && mermaid.init()
+            })
+          }
+        }
+      </script>
+      <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <!--
+      <script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script>
+      -->
+    </div>
+    <script th:src="@{/assets/js/jquery-3.6.4.min.js}"></script>
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    -->
+    <!--
+    <script th:src="@{/assets/mycustom/gitcalendar/js/gitcalendar.js}" defer></script>
+    -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@latest/source/js/issues.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    -->
+    <script th:src="@{/assets/mycustom/magnet/js/catalogMagnet.js}" defer></script>
+    <script th:src="@{/assets/mycustom/swiper/swiper.min.js}" defer></script>
+    <script th:src="@{/assets/mycustom/swiper/swiperindex.js}" defer></script>
+    <script th:src="@{/assets/mycustom/js/moments.js}" defer></script>
+    <script th:src="@{/assets/mycustom/js/smooth-scrolling.js}" defer></script>
+    <script th:src="@{/assets/mycustom/js/custom.js}" defer></script>
+    
+    <!--
+    <script>
+      (function(){
+        const bp = document.createElement('script');
+        const curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else{
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.dataset.pjax = ''
+        const s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+      })()
+    </script>
+    -->
+  </div>
+  <!--/* theme-change end */-->
+  
+  <script th:src="@{/assets/mycustom/jqcloud2/jqcloud.min.js}" defer></script>
+  <th:block th:if="${theme.config.tagAndCategory.tag_cloud}">
+      <script th:src="@{/assets/mycustom/jqcloud2/jqcloud.min.js}" defer></script>
+      <script type="text/javascript" th:inline="javascript">
+        const tags = /*[[${tagFinder.listAll()}]]*/
+        var wordcloud = tags.map(tag => {
+            return {
+                text: tag.spec.displayName,
+                weight: tag.postCount,
+                link: tag.status.permalink
+            }
+        })
+      </script>
+    </th:block>
+  <!--自己魔改的 end-->
+</th:block>

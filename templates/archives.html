@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{layout :: layout(_title = ~{::title}, _header = ~{::header}, _content = ~{::content},path='archives')}"
+>
+  <!-- 原主题
+    <th:block th:fragment="header">
+    <th:block
+    th:replace="~{macro/page-header :: page-header(extension=${archives}, frontCover=${theme.config.patternimg.archives_patternimg}, headerTitle =  ~{::headerTitle},, id='archives', isRandomImage = true)}"
+    />
+  </th:block>
+  -->
+  <th:block th:fragment="header">
+    <div id="page-site-info">
+      <h1 id="site-title" th:text="${theme.config.archives.custom_title}"></h1>
+    </div>
+  </th:block>
+  
+
+  <th:block th:fragment="headerTitle">
+    <h1 data-i18n="page.archives.title"></h1>
+  </th:block>
+
+  <!-- 魔改的-->
+  <th:block th:fragment="content">
+    <!-- 归档页样式1 -->
+    <th:block th:if="${theme.config.archives.archives_filter == 'filter-sanarous'}">
+      <div id="archive">
+        <th:block th:each="archive : ${archives.items}">
+          <h2 th:text="${archive.year}+'年'"></h2>
+          <article class="post">
+            <th:block th:each="month : ${archive.months}">
+              <th:block th:each="post : ${month.posts}">
+                <div class="timenode-sanarous">
+                  <a class="meta" th:href="@{${post.status.permalink}}" data-pjax>
+                    <time th:text="${#dates.format(post.spec.publishTime,'MM-dd')}" class="my-post-time"></time>
+                    <span th:text="${post.spec.title}"></span>
+                  </a>
+                </div>
+              </th:block>
+            </th:block>
+          </article>
+        </th:block>
+        <!-- 分页 -->
+        <nav id="pagination" >
+          <th:block th:replace="~{module/home/list-nextprev-custom :: pagination(${archives},'/archives')}"></th:block>
+        </nav>
+      </div>
+    </th:block>
+    <!-- 归档页样式2 -->
+    <th:block th:if="${theme.config.archives.archives_filter == 'filter-butterfly'}">
+      <div id="archive">
+        <div class="article-sort-title" th:with="stats = ${siteStatsFinder.getStats()}" th:text="'文章总览'+' - '+${stats.post}"></div>
+        <div class="article-sort" th:each="archive : ${archives.items}">
+          <div class="article-sort-item year" th:text="${archive.year}">2022</div>
+          <th:block th:each="month : ${archive.months}">
+            <th:block th:each="post : ${month.posts}">
+              <div class="article-sort-item">
+                <a class="article-sort-item-img" th:href="@{${post.status.permalink}}" th:alt="${post.spec.title}">
+                  <img data-lazy-src="http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg" 
+                  alt="React基础速通计划：React Hooks" 
+                  onerror="this.onerror=null;this.src='http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg'" 
+                  data-ll-status="loaded" 
+                  class="entered loaded" 
+                  th:src="${post.spec.cover}">
+                </a>
+                <div class="article-sort-item-info">
+                  <div class="article-sort-item-time">
+                    <i class="far fa-calendar-alt"></i>
+                    <time class="post-meta-date-created" datetime="2022-06-26T14:26:47.000Z" title="发表于 2022-06-26 14:26:47">2022-06-26</time>
+                  </div>
+                  <a class="article-sort-item-title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">文章标题</a>
+                </div>
+              </div>
+            </th:block>
+          </th:block>
+          
+        </div>
+        <!-- 分页 -->
+        <nav id="pagination" >
+          <th:block th:replace="~{module/home/list-nextprev-custom :: pagination(${archives},'/archives')}"></th:block>
+        </nav>
+      </div>
+    </th:block>
+  </th:block>
+
+</html>
