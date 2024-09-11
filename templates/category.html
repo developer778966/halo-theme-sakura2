@@ -1,0 +1,82 @@
+<!--/* 分类页面 */-->
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{layout :: layout(_title = ~{::title}, _header = ~{::header}, _content = ~{::content},path='/categories')}"
+>
+<!--原主题
+  <th:block th:fragment="title">
+    <th:block th:text="${category.spec.displayName} + '|' + ${site.title}"></th:block>
+  </th:block>
+
+  <th:block th:fragment="header">
+    <div class="category-header">
+      <th:block th:replace="~{macro/page-header :: page-header(extension = ${category}, frontCover = ${category.spec.cover}, headerTitle = ~{::headerTitle})}" />
+    </div>
+  </th:block>
+-->
+  <th:block th:fragment="header">
+    <div id="page-site-info">
+      <h1 id="site-title" th:text="${category.spec.displayName}"></h1>
+      <div id="site-subtitle">
+        <span id="subtitle"></span>
+        <span class="typed-cursor" aria-hidden="true">|</span>
+      </div>
+    </div>
+  </th:block>
+  <th:block th:fragment="content">
+    <div id="category">
+      <div class="article-sort-title" th:text="'分类'+' - '+${category.spec.displayName}"></div>
+      <th:block  th:with="postItems=${posts.items}">
+        <div class="article-sort">
+          <div class="article-sort-item"  th:each="post : ${postItems}">
+            <a class="article-sort-item-img" th:href="@{${post.status.permalink}}" th:alt="${post.spec.title}">
+              <img data-lazy-src="http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg" 
+              th:alt="${post.spec.title}" 
+              onerror="this.onerror=null;this.src='http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg'" 
+              data-ll-status="loaded" 
+              class="entered loaded" 
+              th:src="${post.spec.cover}">
+            </a>
+            <div class="article-sort-item-info">
+              <div class="article-sort-item-time">
+                <i class="far fa-calendar-alt"></i>
+                <time class="post-meta-date-created" datetime="2022-06-26T14:26:47.000Z" title="发表于 2022-06-26 14:26:47">2022-06-26</time>
+              </div>
+              <a class="article-sort-item-title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">文章标题</a>
+            </div>
+          </div>
+        </div>
+      </th:block>
+      
+      <!-- 分页 -->
+      <nav id="pagination" >
+        <th:block th:replace="~{module/home/list-nextprev-custom :: pagination(${posts},'/categories/' + ${category.spec.slug})}"></th:block>
+      </nav>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="headerTitle">
+    <!--/* 具有背景图的情况下，分类和标签的标题样式问题 */-->
+    <h1 class="cat-title" data-i18n="page.categories.item_title" th:i18n-options="|{ title: '${category.spec.displayName}' }|"></h1>
+    <span class="cat-des" th:text="${category.spec.description}"></span>
+  </th:block>
+<!--原主题
+  <th:block th:fragment="content">
+    <div id="primary" th:with="postItems=${posts.items}">
+      <main id="main" class="site-main" role="main">
+        <th:block th:if="${posts.totalPages gt 0}">
+          <th:block th:each="post : ${postItems}">
+            <th:block th:replace="~{macro/content :: content(${post})}" />
+          </th:block>
+          <div class="clearer"></div>
+        </th:block>
+        <th:block th:unless="${posts.totalPages gt 0}">
+          <th:block th:replace="~{macro/content-none}" />
+        </th:block>
+      </main>
+      <th:block th:replace="~{module/list-pagination :: pagination(${posts})}"></th:block>
+    </div>
+  </th:block>
+-->
+</html>

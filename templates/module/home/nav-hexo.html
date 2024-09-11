@@ -1,0 +1,21 @@
+<!--/* TODO: 2.0 版本菜单暂无图标 */-->
+<div id="menus">
+	<div class="menus_items" th:with="menu = ${menuFinder.getPrimary()}">
+		<div class="menus_item" th:each="menuItem : ${menu.menuItems}">
+			<a class="site-page" th:href="@{${menuItem.status?.href}}">
+				<i class="fa-fw fas fa-bookmark"></i>
+				<span th:text="${menuItem.status.displayName}"> 博客</span>
+				<i class="fas fa-chevron-down expand"></i>
+			</a>
+
+			<ul th:if="${not #lists.isEmpty(menuItem.children)}" class="menus_item_child" style="left:-20px;">
+				<li th:each="child : ${menuItem.children}">
+					<a class="site-page" th:href="${child.status.href}">
+						<i class="fa-fw fas fa-home"></i>
+						<span th:text="${child.status.displayName}"> 首页</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

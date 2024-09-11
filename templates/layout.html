@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="zh-CN" th:fragment="layout(_title, _header, _content)">
+  <head>
+    <!--/* 引入公共 Head */-->
+    <th:block th:replace="~{module/head/index}" />
+    <!--/* title */-->
+    <title>
+      <th:block th:if="${_title != null}"> <th:block th:replace="${_title}"></th:block> </th:block> <th:block
+      th:unless="${_title != null}"> <th:block th:if="${#strings.isEmpty(site.subtitle)}"
+      th:text="${site.title}"></th:block> <th:block th:unless="${#strings.isEmpty(site.subtitle)}"
+      th:text="|${site.title} - ${site.subtitle}|"></th:block> </th:block>
+    </title>
+
+    <!--/* noscript */-->
+    <th:block th:replace="~{scripts/noscript}" />
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" class="serif">
+    <!-- 背景图 -->
+    <div id="web_bg"></div>
+    <div class="pjax">
+      <!--/* variables.html 根据配置设置 css 变量值，全局 css 通过变量值进行处理 */-->
+      <th:block th:replace="~{module/variables/index}"></th:block>
+    </div>
+    <div class="page" id="body-wrap">
+      <section id="main-container" class="container">
+        <!--/* 导航栏 */-->
+        <header th:class="${path=='index'?'full_page':'not-index-bg'}" id="page-header">
+          <nav id="nav" class="show fixed visible" >
+            <span id="blog_name">
+              <a id="site-name" th:href="${site.url}" th:text="${site.title}"></a>
+            </span>
+            <!-- 导航栏 -->
+            <th:block th:replace="~{module/home/nav-hexo}"></th:block>
+            <!-- 搜索框 插件js实现搜索功能 -->
+            <div id="rightmenu" style="flex:1" th:if="${theme.config.general.top_search}">
+              <div id="search-button" style="position:absolute;right:2%" th:if="${pluginFinder.available('PluginSearchWidget')}">
+                <a class="site-page social-icon search" href="javascript:SearchWidget.open()" title="搜索">
+                  <i class="fas fa-search fa-fw"></i>
+                  <span> 搜索</span>
+                </a>
+              </div>
+              <div id="toggle-menu">
+                <a class="site-page">
+                  <i class="fas fa-bars fa-fw"></i>
+                </a>
+              </div>
+            </div>
+          </nav>
+          <th:block th:if="${_header != null}">
+            <th:block th:replace="${_header}" />
+          </th:block>
+        </header>
+
+        <main class="layout wrapper" id="content-inner">
+
+          <!-- 图库页面调整布局 -->
+          <th:block th:if="${path == 'photos'}">
+            <style>
+              .layout {
+                display: block;
+              }
+            </style>
+          </th:block>
+
+          <!-- 页面主体 -->
+          <th:block th:replace="${_content}" />
+
+          <!-- 非图库页面显示侧边栏 -->
+          <th:block th:if="${path != 'photos'}">
+            <div class="aside-content" id="aside-content">
+              <div class="card-widget card-info">
+                <div class="card-info-avatar is-center" th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
+                  <img class="avatar-img entered loaded" 
+                  data-lazy-src="https://forever97-picture-bed.oss-cn-hangzhou.aliyuncs.com/img/avatar.png" 
+                  onerror="this.onerror=null;this.src='/img/404.jpg'" 
+                  alt="avatar" 
+                  data-ll-status="loaded" 
+                  th:src="@{/assets/images/default/avatar.webp}">
+                  <div class="author-info__name" th:text="${currentUser.displayName}">这里是作者昵称</div>
+                  <div class="author-info__description" th:text="${currentUser.bio}">这里是描述</div>
+                </div>
+                <div class="card-info-data" th:with="stats = ${siteStatsFinder.getStats()}">
+                  <div class="card-info-data-item is-center">
+                    <a href="/archives">
+                      <div class="headline">文章</div>
+                      <div class="length-num" th:text="${stats.post}">149</div>
+                    </a>
+                  </div>
+                  <div class="card-info-data-item is-center" th:with="tags = ${tagFinder.listAll()}">
+                    <a href="/tags">
+                      <div class="headline">标签</div>
+                      <div class="length-num" th:text="${#lists.size(tags)}">122</div>
+                    </a>
+                  </div>
+                  <div class="card-info-data-item is-center">
+                    <a href="/categories">
+                      <div class="headline">分类</div>
+                      <div class="length-num" th:text="${stats.category}">15</div>
+                    </a>
+                  </div>
+                </div>
+                <a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://www.baidu.com">
+                  <i class="fab fa-github"></i>
+                  <span>来给我加星星</span>
+                </a>
+                <div class="card-info-social-icons is-center">
+                  <a class="social-icon" href="" target="_blank" title="Github">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a class="social-icon" href="" target="_blank" title="Gitee">
+                    <i class="fab fa-google"></i>
+                  </a>
+                  <a class="social-icon" href="" target="_blank" title="博客园">
+                    <i class="fas fa-blog"></i>
+                  </a>
+                  <a class="social-icon" href="" target="_blank" title="QQ">
+                    <i class="fab fa-qq"></i>
+                  </a>
+                  <a class="social-icon" href="" target="_blank" title="Email">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-widget card-announcement">
+                <div class="item-headline">
+                  <i class="fas fa-bullhorn card-announcement-animation"></i>
+                  <span>黑瞳の吧啦吧啦</span>
+                </div>
+                <div class="announcement_content">
+                  <h2 style="color:orange; margin:2px;">🍊欢迎光临本站</h2> -->如果卡顿--> <a target="_blank" rel="noopener" href="/index" style="cursor:pointer; color:#fff; background-color:orange; padding:2px 5px; border-radius:5px;">那也么得办法</a>
+                </div>
+              </div>
+              <div class="sticky_layout">
+                <!-- 目录 -->
+                <th:block th:if="${path=='post'}">
+                  <div class="card-widget" id="card-toc">
+                    <div class="item-headline">
+                      <i class="fas fa-stream"></i>
+                      <span>目录</span>
+                    </div>
+                    <div class="toc-content" progress-percentage="0">
+                    </div>
+                  </div>
+                </th:block>
+                <div class="card-widget card-recent-post">
+                  <div class="item-headline">
+                    <i class="fas fa-history"></i>
+                    <span>最新文章🍰🍵🍺</span>
+                  </div>
+                  <div class="aside-list" th:with="posts = ${postFinder.list(1,5)}">
+                    <div class="aside-list-item" th:each="post : ${posts.items}">
+                      <a class="thumbnail" th:href="@{${post.status.permalink}}" th:alt="${post.spec.title}">
+                        <img data-lazy-src="https://forever97-picture-bed.oss-cn-hangzhou.aliyuncs.com/img/react.png" 
+                        onerror="this.onerror=null;this.src='/img/404.jpg'" 
+                        alt="React基础速通计划：React Hooks" 
+                        data-ll-status="loaded" 
+                        class="entered loaded" 
+                        th:src="@{/assets/images/default/hd.webp}">
+                      </a>
+                      <div class="content">
+                        <a class="title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">React基础速通计划：React Hooks</a>
+                        <time th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}" datetime="2022-06-26T14:26:47.000Z" title="发表于 2022-06-26 14:26:47">2022-02-02</time>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <!-- 让侧边栏的分类归档站点信息在post页面不显示 -->
+                <th:block th:unless="${path=='post'}">
+                  <div class="card-widget card-categories">
+                    <div class="item-headline">
+                      <i class="fas fa-folder-open"></i>
+                      <span>分类⭐🌙🌺✨🍭</span>
+                    </div>
+                    <ul class="card-category-list" id="aside-cat-list" th:with="categories = ${categoryFinder.list(1,7)}">
+                      <li class="card-category-list-item " th:each="category : ${categories.items}">
+                        <a class="card-category-list-link" th:href="@{${category.status.permalink}}">
+                          <span class="card-category-list-name" style="width: 60%;" th:text="'✨'+${category.spec.displayName}">✨题解杂货铺</span>
+                          <span class="card-category-list-count" th:text="${category.postCount}">26</span>
+                        </a>
+                      </li>
+                      
+                      <li class="card-category-list-item more is-center">
+                        <a class="card-category-list-link-more" href="/categories">
+                          <span>查看更多</span>
+                          <i class="fas fa-angle-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-widget card-archives">
+                    <div class="item-headline">
+                      <i class="fas fa-archive"></i>
+                      <span>归档</span>
+                    </div>
+                    <ul class="card-archive-list" th:with="archives = ${postFinder.archives(1,50)}">
+                      <li class="card-archive-list-item" th:each="archive : ${archives.items}">
+                        <a class="card-archive-list-link" 
+                        th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}" 
+                        th:each="month,monthStat : ${archive.months}">
+                          <span class="card-archive-list-date" style="width: 60%;" th:text="${archive.year}+'年 '+${month.month}+'月'">六月 2022</span>
+                          <span class="card-archive-list-count" th:text="${#lists.size(month.posts)}">3</span>
+                        </a>
+                      </li>
+                      
+                      <li class="card-archive-list-item more is-center">
+                        <a class="card-archive-list-link-more" href="/archives">
+                          <span>查看更多</span>
+                          <i class="fas fa-angle-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-widget card-webinfo">
+                    <div class="item-headline">
+                      <i class="fas fa-chart-line"></i>
+                      <span>本站信息</span>
+                    </div>
+                    <div class="webinfo" th:with="stats = ${siteStatsFinder.getStats()}">
+                      <div class="webinfo-item">
+                        <div class="item-name">文章数目 :</div>
+                        <div class="item-count" th:text="${stats.post}">149</div>
+                      </div>
+                      <!-- 先不启用，此处和footer的运行时间冲突
+                      <div class="webinfo-item">
+                        <div class="item-name">已运行 :</div>
+                        <div class="item-count" id="runtimeshow" data-publishdate="2019-08-18T00:00:00.000Z"><span id="span_dt_dt"></span></div>
+                      </div>
+                      -->
+                      <div class="webinfo-item">
+                        <div class="item-name">本站总字数 :</div>
+                        <div class="item-count">此处省略万字......</div>
+                      </div>
+                      <!-- 没使用busuanzi,就先不统计访客了
+                      <div class="webinfo-item">
+                        <div class="item-name">本站访客数 :</div>
+                        <div class="item-count" id="busuanzi_value_site_uv"></div>
+                      </div>
+                      -->
+                      <div class="webinfo-item">
+                        <div class="item-name">本站总访问量 :</div>
+                        <div class="item-count" id="busuanzi_value_site_pv" th:text="${stats.visit}"></div>
+                      </div>
+                      <div class="webinfo-item" th:with="posts = ${postFinder.list(1,1)}">
+                        <div class="item-name">最后更新时间 :</div>
+                        <div th:each="post : ${posts.items}" 
+                          th:text="${#dates.format(post.spec.publishTime,theme.config.post.post_time_display_type ?: 'yyyy-MM-dd')}" 
+                          class="item-count" 
+                          id="last-push-date" 
+                          data-lastpushdate="2022-06-26T06:44:47.577Z">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th:block>
+              </div>
+            </div>
+          </th:block>
+          
+          
+        </main>
+        <footer id="footer" style="background-image: url(https://forever97-picture-bed.oss-cn-hangzhou.aliyuncs.com/img/welcome-cover.jpg)">
+          <div id="footer-wrap">
+            <th:block th:replace="~{module/footer}" />
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <section class="site-sidebar">
+      <div class="sidebar-inner">
+        <!--/* 侧边栏 */-->
+        <th:block th:replace="~{module/sidebar/index}" />
+      </div>
+    </section>
+
+    
+
+    <!--/* 全局小部件，如回到顶部等 */-->
+    <th:block th:replace="~{module/widgets/index}" />
+
+    <!--/* script */-->
+    <!--/* 主题自身的 script */-->
+    <th:block th:replace="~{scripts/index}" />
+    <!--/* 与 pjax 生命周期相关的 script。每个页面都应重新请求获取（如果仅是需要重新执行则不必放在这里） */-->
+    <div id="pjax" th:if="${theme.config.others.poi_pjax}"></div>
+  </body>
+</html>

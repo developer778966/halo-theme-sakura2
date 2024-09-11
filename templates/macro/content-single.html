@@ -1,0 +1,14 @@
+<!--/*-->
+@package Akina
+<!--*/-->
+<th:block th:fragment="content-single(post)">
+  <div id="post">
+    <!-- post-content -->
+    <article class="post-content" id="article-container">
+
+        <th:block th:utext="${post.content.content}"></th:block>
+
+    </article>
+    
+</div>
+</th:block>

@@ -1,0 +1,56 @@
+<!---
+    未央童话镇主题 分页
+    https://forever97.top/
+-->
+<div class="pagination" th:fragment="pagination(ps,path)">
+    <th:block >
+        <a data-pjax th:if="${ps.hasPrevious()}"
+            th:href="${ps.prevUrl}"
+            rel="prev"
+            title="上一页"
+            class="extend prev">
+            <i class="fas fa-chevron-left fa-fw"></i>
+        </a>
+
+        <!-- 如果总页数小于5 -->
+        <th:block th:unless="${ps.totalPages > 5}">
+            <a data-pjax
+            th:each="index : ${#numbers.sequence(1,ps.totalPages)}"
+            th:class="${ps.page == index ?  'page-number current': 'page-number'}"
+            th:href="@{${path+'/page/'}  + ${index}}" th:text="${index}"></a>
+        </th:block>
+        <!-- 如果总页数大于5 -->
+        <th:block th:if="${ps.totalPages > 5}">
+            <!-- 没有上一页才显示 -->
+            <th:block th:unless="${ps.hasPrevious}">
+                <a data-pjax
+                    th:each="index : ${#numbers.sequence(ps.page,ps.page+1)}"
+                    th:class="${ps.page == index ?  'page-number current': 'page-number'}"
+                    th:href="@{${path+'/page/'}  + ${index}}" th:text="${index}"></a>   
+            </th:block>
+            <!-- 没有下一页才显示 -->
+            <th:block th:unless="${ps.hasNext}">
+                <a data-pjax
+                    th:each="index : ${#numbers.sequence(ps.page-1,ps.page)}"
+                    th:class="${ps.page == index ?  'page-number current': 'page-number'}"
+                    th:href="@{${path+'/page/'}  + ${index}}" th:text="${index}"></a>   
+            </th:block>
+            <!-- 上一页下一页都有才显示 -->
+            <th:block th:if="${ps.hasNext && ps.hasPrevious}">
+                <a data-pjax
+                th:each="index : ${#numbers.sequence(ps.page-1,ps.page+1)}"
+                th:class="${ps.page == index ?  'page-number current': 'page-number'}"
+                th:href="@{${path+'/page/'}  + ${index}}" th:text="${index}"></a>
+            </th:block>
+        </th:block>
+
+        <a data-pjax th:if="${ps.hasNext()}"
+            th:href="${ps.nextUrl}"
+            rel="next"
+            title="下一页"
+            class="extend prev">
+            <i class="fas fa-chevron-right fa-fw"></i>
+        </a>
+    </th:block>
+
+  </div>

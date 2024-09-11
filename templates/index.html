@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{layout :: layout(_title = ~{::title}, _header = ~{::header}, _content = ~{::content},path='index')}"
+>
+  <th:block th:fragment="header">
+    <div id="site-info">
+      <h1 id="site-title" th:text="${site.title}"></h1>
+      <div id="site-subtitle">
+        <span id="subtitle"></span>
+        <!--<span class="typed-cursor" aria-hidden="true">|</span>-->
+      </div>
+      <!-- 
+      <div id="site_social_icons">
+        <a class="social-icon" href="https://github.com/forever97" target="_blank" title="Github">
+          <i class="fab fa-github"></i>
+        </a>
+        <a class="social-icon" href="https://gitee.com/forever97/" target="_blank" title="Gitee">
+          <i class="fab fa-google"></i>
+        </a>
+        <a class="social-icon" href="https://www.cnblogs.com/forever97" target="_blank" title="博客园">
+          <i class="fas fa-blog"></i>
+        </a>
+        <a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=857426255&amp;site=qq&amp;menu=yes" target="_blank" title="QQ">
+          <i class="fab fa-qq"></i>
+        </a>
+        <a class="social-icon" href="mailto:857426255@qq.com" target="_blank" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div> -->
+    </div>
+    <div id="scroll-down">
+      <i class="fas fa-angle-down scroll-down-effects"></i>
+    </div>
+  </th:block>
+  <th:block th:fragment="content">
+    <div class="recent-posts" id="recent-posts">
+      <div class="recent-post-item photo-tag" style="width:100%;height:auto;float:left;padding:5px;flex-wrap:wrap;justify-content:center;flex-direction:row;">
+        <div id="catalogMagnet" th:with="categories = ${categoryFinder.listAsTree()}">
+          <th:block th:each="category : ${categories}">
+            <figure class="gallery-group color-card" style="background: url(&quot;&quot;) rgb(0, 0, 0); box-shadow: rgba(50, 50, 50, 0.4) 3px 3px 18px 0px inset;">
+              <img src="https://forever97-picture-bed.oss-cn-hangzhou.aliyuncs.com/img/tijie.jpg" data-ll-status="loaded" class="gallery-group-img loaded">
+              <figcaption style="background-image: linear-gradient(rgba(0, 0, 0, 0.4) 25%, rgba(16, 16, 16, 0) 100%); color: white;">
+                <div class="gallery-group-name magnetname" style="font-size: 1rem;">
+                  <span>| </span>
+                  <a th:text="${category.spec.displayName}" 
+                  th:href="@{${category.status.permalink}}" style="color: white;">✨此处分类名称</a>
+                </div>
+                <li class="category-list-item">
+                  <span class="category-list-count" th:text="${category.postCount}">
+                    <i class="fas fa-book"></i>
+                  </span>
+                </li>
+                <p th:text="${category.spec.description}">一些零碎的题解</p>
+                <a th:href="@{${category.status.permalink}}"></a>
+              </figcaption>
+            </figure>
+          </th:block>
+        </div>
+        <div class="categoryMagnetitem" th:with="categories = ${categoryFinder.listAsTree()}" style="display:none">
+          <ul class="category-list" th:each="category : ${categories}">
+            <li class="category-list-item">
+              <a th:text="${category.spec.displayName}" class="category-list-link" th:href="@{${category.status.permalink}}">✨此处分类名称</a>
+              <span class="category-list-count" th:text="${category.postCount}">26</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="recent-post-item" style="height:0px;clear:both;margin-top: 0px;border: 0px;"></div>
+      <th:block th:with="postItems = ${posts.items}">
+        <div class="recent-post-item" th:each="post,postStat : ${postItems}">
+          <div th:class="${postStat.odd ?  'left_radius post_cover': 'right_radius post_cover'}">
+            <a th:href="@{${post.status.permalink}}" th:alt="${post.spec.title}">
+              <img class="post_bg entered loaded" 
+              data-lazy-src="http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg" 
+              onerror="this.onerror=null;this.src='http://img.netbian.com/file/2024/0323/small0012132yPPt1711123933.jpg'" 
+              alt="React基础速通计划：React Hooks" 
+              data-ll-status="loaded" 
+              th:src="${post.spec.cover}">
+            </a>
+          </div>
+          <div class="recent-post-info">
+            <a class="article-title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">React基础速通计划：React Hooks</a>
+            <div class="article-meta-wrap">
+              <span class="post-meta-date">
+                <i class="far fa-calendar-alt"></i>
+                <span class="article-meta-label">发表于</span>
+                <time th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}" datetime="2022-06-26T14:26:47.000Z" title="发表于 2022-06-26 14:26:47">2022-06-26</time>
+              </span>
+              <span class="article-meta" th:each="category : ${post.categories}">
+                <span class="article-meta__separator">|</span>
+                <i class="fas fa-inbox article-meta__icon"></i>
+                <a class="article-meta__categories" th:href="@{${category.status.permalink}}" th:text="${category.spec.displayName}">🎨React染坊</a>
+              </span>
+              <span class="article-meta tags" th:each="tag : ${post.tags}">
+                <span class="article-meta__separator">|</span>
+                <i class="fas fa-tag article-meta__icon"></i>
+                <a class="article-meta__tags" th:href="@{${tag.status.permalink}}" th:text="${tag.spec.displayName}">React</a>
+              </span>
+            </div>
+            <div class="content" th:text="${post.status.excerpt}">本文是对react学习的一个简单记录，自用复习回顾</div>
+          </div>
+        </div>
+      </th:block>
+      <!-- 分页 -->
+      <nav id="pagination" >
+        <th:block th:replace="~{module/home/list-nextprev-custom :: pagination(${posts},'/index')}"></th:block>
+      </nav>
+    </div>
+  </th:block>
+</html>
